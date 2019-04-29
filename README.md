@@ -6,7 +6,8 @@ By **Romain GOUPIL** alias **maleikdev**
 ChronoRun is a programm that has the objectif to help comissaires during the races, to count the racers and establish the rankings.
 
 ### Todo
-- [ ] Counting programm
+- [x] Counting programm
+- [ ] Counting program with a stop watch
 - [ ] Algorithm to establish the ranking with the counting
 - [ ] Link the ranking with a database (names, categories, licences IDs, ...)
 - [ ] Guest User Interface
