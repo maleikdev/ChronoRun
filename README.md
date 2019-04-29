@@ -16,7 +16,7 @@ ChronoRun is a programm that has the objectif to help comissaires during the rac
 
 Under GNU General Public License v3.0. See LICENSE file for more.
 
-	TIGINET
+	ChronoRun
     Copyright (C) 2019  GOUPIL Romain
 	
 	For contact see Contact section.
