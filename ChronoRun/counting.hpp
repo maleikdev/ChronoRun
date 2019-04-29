@@ -3,10 +3,7 @@
 
 /**
 * @file		counting.hpp
-*
 * @author	Romain GOUPIL - maleikdev
-*
-* @version	1.0
 *
 * @brief	File for the counting part.
 *
