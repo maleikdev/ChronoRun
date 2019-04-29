@@ -1,6 +1,3 @@
-#ifndef COUNTING_HPP
-#define COUNTING_HPP
-
 /**
 * @file		counting.hpp
 * @author	Romain GOUPIL - maleikdev
@@ -10,10 +7,16 @@
 * @details	Declaration of the class for the counting table, and loading of the plates database for checking errors during the counting.
 */
 
+#ifndef COUNTING_HPP
+#define COUNTING_HPP
+
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <limits>
+
+#define SKIP_LINE(file) file.ignore(std::numeric_limits<std::streamsize>::max(), '\n')
 
 /**
 * @class	Counting
@@ -24,7 +27,7 @@ class Counting
 {
 public:
 	Counting();
-	Counting(std::string baseFileName);
+	Counting(const char* baseFileName);
 	
 	void runnerPassing(const int plate);
 	void cancelPreviousPassing();
