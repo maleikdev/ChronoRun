@@ -36,7 +36,7 @@ Counting::Counting(const char* baseFileName)
 		while (true)
 		{
 			baseFile.get(gotChar);
-			if (gotChar == ';' || gotChar < 48 || gotChar > 57)
+			if (!isdigit(gotChar))
 				break;
 
 			tempPlate = (tempPlate * 10) + (int)gotChar - 48;
