@@ -59,6 +59,9 @@ void Counting::runnerPassing(const int plate)
 {
 	m_tabPlate.push_back(plate);
 	m_countedRunners++;
+
+	if (!isInDatabase(plate))
+		std::cout << "Warning ! " << plate << " is not in the database !" << std::endl;
 }
 
 void Counting::cancelPreviousPassing()
@@ -76,7 +79,25 @@ int Counting::getRunnersNumber()
 	return m_runnersNumber;
 }
 
+int Counting::getCountedRunners()
+{
+	return m_countedRunners;
+}
+
 int Counting::getPlateInVector(const int i)
 {
 	return m_tabPlate[i];
+}
+
+bool Counting::isInDatabase(int plate)
+{
+	int i    = 0;
+
+	for (i = 0; i < m_runnersNumber; i++)
+	{
+		if (m_basePlate[i] == plate)
+			return true;
+	}
+	
+	return false;
 }

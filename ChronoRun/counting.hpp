@@ -33,7 +33,10 @@ public:
 	void cancelPreviousPassing();
 
 	int getRunnersNumber();
+	int getCountedRunners();
 	int getPlateInVector(const int i);
+
+	bool isInDatabase(int plate);
 
 private:
 	std::vector<int> m_tabPlate;
