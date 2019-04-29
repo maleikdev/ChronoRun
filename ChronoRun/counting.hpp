@@ -39,6 +39,7 @@ private:
 	std::vector<int> m_tabPlate;
 	std::vector<int> m_basePlate;
 	int m_runnersNumber;
+	int m_countedRunners;
 };
 
 #endif // !COUNTING_HPP
