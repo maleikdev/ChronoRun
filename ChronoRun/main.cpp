@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 	int i = 0;
 	std::cout << "Hello World" << std::endl;
 
-	Counting countingTable;
+	Counting countingTable("base.csv");
 
 	countingTable.runnerPassing(125);
 	countingTable.runnerPassing(123);

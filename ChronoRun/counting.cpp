@@ -9,7 +9,15 @@ Counting::Counting(std::string baseFileName)
 {
 	m_runnersNumber = 0;
 
-	std::ifstream baseFile(baseFileName);
+	std::cout << "ok1" << std::endl;
+
+	if (!baseFileName.c_str())
+		return;
+
+	std::cout << "ok2" << std::endl;
+
+	int tempPlate = 0;
+	std::ifstream baseFile(baseFileName.c_str(), std::ios::in);
 	std::string fileLine;
 
 
@@ -19,10 +27,16 @@ Counting::Counting(std::string baseFileName)
 		return;
 	}
 
+	std::cout << "ok3" << std::endl;
 
-	while (std::getline(baseFile, fileLine))
+	while (!baseFile.eof())
 	{
 		///TODO split the line, to get the plate number
+		std::cout << "ok4" << std::endl;
+		baseFile >> tempPlate;
+		std::getline(baseFile, fileLine);
+
+		std::cout << tempPlate << std::endl;
 	}
 
 	baseFile.close();
