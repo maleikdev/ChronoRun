@@ -9,6 +9,8 @@ int main(int argc, char** argv)
 
 	Counting countingTable("base.csv");
 
+	countingTable.startRace();
+
 	countingTable.runnerPassing(125);
 	countingTable.runnerPassing(123);
 

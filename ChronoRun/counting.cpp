@@ -4,12 +4,18 @@ Counting::Counting()
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
+	raceIsRunning    = false;
+	m_startTime      = 0;
+	m_endTime        = 0;
 }
 
 Counting::Counting(const char* baseFileName)
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
+	raceIsRunning    = false;
+	m_startTime      = 0;
+	m_endTime        = 0;
 
 	if (!baseFileName)
 		return;
@@ -55,8 +61,28 @@ Counting::Counting(const char* baseFileName)
 	baseFile.close();
 }
 
+void Counting::startRace()
+{
+	struct tm* clockFormatTime;
+
+	m_startTime = time(NULL);
+	raceIsRunning = true;
+
+	///TODO : Find a safe equivalent for localtime().
+	clockFormatTime = localtime(&m_startTime);
+
+	std::cout << "Race started at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
+
+}
+
 void Counting::runnerPassing(const int plate)
 {
+	if (!raceIsRunning)
+	{
+		std::cout << "Race is not running, impossible to count the racers !" << std::endl;
+		return;
+	}
+
 	m_tabPlate.push_back(plate);
 	m_countedRunners++;
 
@@ -89,7 +115,7 @@ int Counting::getPlateInVector(const int i)
 	return m_tabPlate[i];
 }
 
-bool Counting::isInDatabase(int plate)
+bool Counting::isInDatabase(const int plate)
 {
 	int i    = 0;
 
