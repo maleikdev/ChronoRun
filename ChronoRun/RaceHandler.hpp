@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 /**
-* @file		counting.hpp
+* @file		raceEndler.hpp
 * @author	Romain GOUPIL - maleikdev
 *
 * @brief	File for the counting part.
@@ -21,16 +21,23 @@
 
 #define SKIP_LINE(file) file.ignore(std::numeric_limits<std::streamsize>::max(), '\n')
 
+/*
+struct Racer
+{
+	int m_plate;
+	//std::vector<time_t> m_passingTimes;
+};*/
+
 /**
-* @class	Counting
+* @class RaceHandler
 *
 * @brief	Class for the pointing table.
 */
-class Counting
+class RaceHandler
 {
 public:
-	Counting();
-	Counting(const char* baseFileName);
+	RaceHandler();
+	RaceHandler(const char* baseFileName);
 
 	void startRace();
 	void endRace();
@@ -47,6 +54,7 @@ private:
 	std::vector<int> m_passedPlates;
 	std::vector<int> m_basePlates;
 	std::vector<time_t> m_passedTimes;
+	//std::vector<Racer> m_preRanking;
 	int m_runnersNumber;
 	int m_countedRunners;
 	bool raceIsRunning;

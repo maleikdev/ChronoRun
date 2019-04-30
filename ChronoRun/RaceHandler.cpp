@@ -1,6 +1,6 @@
-#include "counting.hpp"
+#include "raceEndler.hpp"
 
-Counting::Counting()
+RaceHandler::RaceHandler()
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
@@ -9,7 +9,7 @@ Counting::Counting()
 	m_endTime        = 0;
 }
 
-Counting::Counting(const char* baseFileName)
+RaceHandler::RaceHandler(const char* baseFileName)
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
@@ -61,7 +61,7 @@ Counting::Counting(const char* baseFileName)
 	baseFile.close();
 }
 
-void Counting::startRace()
+void RaceHandler::startRace()
 {
 	struct tm* clockFormatTime;
 
@@ -75,7 +75,7 @@ void Counting::startRace()
 
 }
 
-void Counting::endRace()
+void RaceHandler::endRace()
 {
 	struct tm* clockFormatTime;
 
@@ -88,7 +88,7 @@ void Counting::endRace()
 	std::cout << "Race ended at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
 }
 
-void Counting::runnerPassing(const int plate)
+void RaceHandler::runnerPassing(const int plate)
 {
 	if (!raceIsRunning)
 	{
@@ -104,7 +104,7 @@ void Counting::runnerPassing(const int plate)
 		std::cout << "Warning ! " << plate << " is not in the database !" << std::endl;
 }
 
-void Counting::cancelPreviousPassing()
+void RaceHandler::cancelPreviousPassing()
 {
 	
 	if (m_runnersNumber > 0)
@@ -115,22 +115,22 @@ void Counting::cancelPreviousPassing()
 	}
 }
 
-int Counting::getRunnersNumber()
+int RaceHandler::getRunnersNumber()
 {
 	return m_runnersNumber;
 }
 
-int Counting::getCountedRunners()
+int RaceHandler::getCountedRunners()
 {
 	return m_countedRunners;
 }
 
-int Counting::getPlateInVector(const int i)
+int RaceHandler::getPlateInVector(const int i)
 {
 	return m_passedPlates[i];
 }
 
-bool Counting::isInDatabase(const int plate)
+bool RaceHandler::isInDatabase(const int plate)
 {
 	int i    = 0;
 

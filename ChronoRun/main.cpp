@@ -1,4 +1,4 @@
-#include "counting.hpp"
+#include "RaceHandler.hpp"
 
 #include <iostream>
 
@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 	int i = 0;
 	std::cout << "Hello World" << std::endl;
 
-	Counting countingTable("base.csv");
+	RaceHandler countingTable("base.csv");
 
 	countingTable.startRace();
 
