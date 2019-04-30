@@ -33,6 +33,7 @@ public:
 	Counting(const char* baseFileName);
 
 	void startRace();
+	void endRace();
 	void runnerPassing(const int plate);
 	void cancelPreviousPassing();
 
@@ -43,8 +44,9 @@ public:
 	bool isInDatabase(const int plate);
 
 private:
-	std::vector<int> m_tabPlate;
-	std::vector<int> m_basePlate;
+	std::vector<int> m_passedPlates;
+	std::vector<int> m_basePlates;
+	std::vector<time_t> m_passedTimes;
 	int m_runnersNumber;
 	int m_countedRunners;
 	bool raceIsRunning;

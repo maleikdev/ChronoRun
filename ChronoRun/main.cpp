@@ -15,7 +15,9 @@ int main(int argc, char** argv)
 	countingTable.runnerPassing(123);
 
 	for (i = 0; i < countingTable.getCountedRunners(); i++)
-		std::cout << "Passage numero " << i << " : " << countingTable.getPlateInVector(i) << std::endl;
+		std::cout << "Passage number " << i << " : " << countingTable.getPlateInVector(i) << std::endl;
+
+	countingTable.endRace();
 	
 	return EXIT_SUCCESS;
 }
