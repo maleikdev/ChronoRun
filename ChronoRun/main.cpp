@@ -18,6 +18,11 @@ int main(int argc, char** argv)
 		std::cout << "Passage number " << i << " : " << countingTable.getPlateInVector(i) << std::endl;
 
 	countingTable.endRace();
+
+	/*
+	RaceHandler test;
+
+	test.startRace()*/
 	
 	return EXIT_SUCCESS;
 }

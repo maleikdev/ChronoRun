@@ -1,10 +1,10 @@
-#include "raceEndler.hpp"
+#include "RaceHandler.hpp"
 
 RaceHandler::RaceHandler()
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
-	raceIsRunning    = false;
+	m_raceIsRunning    = false;
 	m_startTime      = 0;
 	m_endTime        = 0;
 }
@@ -13,7 +13,7 @@ RaceHandler::RaceHandler(const char* baseFileName)
 {
 	m_runnersNumber  = 0;
 	m_countedRunners = 0;
-	raceIsRunning    = false;
+	m_raceIsRunning    = false;
 	m_startTime      = 0;
 	m_endTime        = 0;
 
@@ -66,7 +66,7 @@ void RaceHandler::startRace()
 	struct tm* clockFormatTime;
 
 	m_startTime = time(NULL);
-	raceIsRunning = true;
+	m_raceIsRunning = true;
 
 	///TODO : Find a safe equivalent for localtime().
 	clockFormatTime = localtime(&m_startTime);
@@ -80,7 +80,7 @@ void RaceHandler::endRace()
 	struct tm* clockFormatTime;
 
 	m_endTime = time(NULL);
-	raceIsRunning = false;
+	m_raceIsRunning = false;
 
 	///TODO : Find a safe equivalent for localtime().
 	clockFormatTime = localtime(&m_startTime);
@@ -90,7 +90,7 @@ void RaceHandler::endRace()
 
 void RaceHandler::runnerPassing(const int plate)
 {
-	if (!raceIsRunning)
+	if (!m_raceIsRunning)
 	{
 		std::cout << "Race is not running, impossible to count the racers !" << std::endl;
 		return;
@@ -141,4 +141,42 @@ bool RaceHandler::isInDatabase(const int plate)
 	}
 	
 	return false;
+}
+
+int RaceHandler::isInPreRanking(const int plate)
+{
+	int i = 0;
+
+	for (i = 0 ; i < m_preRanking.size() ; i++)
+	{
+		if (m_preRanking[i].m_plate == plate)
+			return i;
+	}
+
+	return -1;
+}
+
+void RaceHandler::generatePreRanking()
+{
+	int i = 0;
+	int countingTableIndicator = 0;
+	Racer tempRacerBeforePushBack;
+
+	for (i = 0 ; i < m_countedRunners ; i++)
+	{
+		countingTableIndicator = isInPreRanking(m_passedPlates[i]);
+		if (countingTableIndicator > -1)
+		{
+			m_preRanking[i].m_passingTimes.push_back(m_passedTimes[i]);
+		}
+		else
+		{
+			tempRacerBeforePushBack.m_plate = m_passedPlates[i];
+			tempRacerBeforePushBack.m_passingTimes.push_back(m_passedTimes[i]);
+			m_preRanking.push_back(tempRacerBeforePushBack);
+
+			tempRacerBeforePushBack.m_plate = 0;
+			tempRacerBeforePushBack.m_passingTimes.clear();
+		}
+	}
 }

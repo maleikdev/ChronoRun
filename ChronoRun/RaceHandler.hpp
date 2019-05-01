@@ -21,12 +21,12 @@
 
 #define SKIP_LINE(file) file.ignore(std::numeric_limits<std::streamsize>::max(), '\n')
 
-/*
+
 struct Racer
 {
 	int m_plate;
-	//std::vector<time_t> m_passingTimes;
-};*/
+	std::vector<time_t> m_passingTimes;
+};
 
 /**
 * @class RaceHandler
@@ -49,15 +49,18 @@ public:
 	int getPlateInVector(const int i);
 
 	bool isInDatabase(const int plate);
+	int isInPreRanking(const int plate);
+
+	void generatePreRanking();
 
 private:
 	std::vector<int> m_passedPlates;
 	std::vector<int> m_basePlates;
 	std::vector<time_t> m_passedTimes;
-	//std::vector<Racer> m_preRanking;
+	std::vector<Racer> m_preRanking;
 	int m_runnersNumber;
 	int m_countedRunners;
-	bool raceIsRunning;
+	bool m_raceIsRunning;
 	time_t m_startTime;
 	time_t m_endTime;
 };
