@@ -5,6 +5,7 @@
 int main(int argc, char** argv)
 {
 	int i = 0;
+	int enteredPlate = 0;
 	std::cout << "Hello World" << std::endl;
 
 	RaceHandler countingTable("base.csv");
@@ -19,10 +20,16 @@ int main(int argc, char** argv)
 
 	countingTable.endRace();
 
-	/*
+	
 	RaceHandler test;
 
-	test.startRace()*/
+	test.startRace();
+	/*
+	do
+	{
+		
+	}while (enteredPlate != -1)
+	*/
 	
 	return EXIT_SUCCESS;
 }
