@@ -180,3 +180,18 @@ void RaceHandler::generatePreRanking()
 		}
 	}
 }
+
+void RaceHandler::displayPreRanking()
+{
+	int i = 0, j = 0;
+
+	for (i = 0 ; i < m_preRanking.size() ; i++)
+	{
+		std::cout << "Racer n° " << m_preRanking[i].m_plate << " Passages : ";
+		for (j = 0 ; j < m_preRanking[i].m_passingTimes.size() ; i++)
+		{
+			std::cout << " - " << m_preRanking[i].m_passingTimes[j];
+		}
+		std::cout << std::endl;
+	}
+}

@@ -24,12 +24,23 @@ int main(int argc, char** argv)
 	RaceHandler test;
 
 	test.startRace();
-	/*
+	
 	do
 	{
-		
-	}while (enteredPlate != -1)
-	*/
+		std::cout << "Pointage, entrez la plaque ou sinon entrez -1 pour quitter le pointage." << std::endl;
+		std::cin >> enteredPlate;
+
+		if (enteredPlate > -1)
+			test.runnerPassing(enteredPlate);
+	} while (enteredPlate != -1);
+
+	test.endRace();
+
+	for (i = 0; i < test.getCountedRunners(); i++)
+		std::cout << "Passage number " << i << " : " << test.getPlateInVector(i) << std::endl;
+
+	
+	
 	
 	return EXIT_SUCCESS;
 }

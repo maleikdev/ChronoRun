@@ -137,6 +137,11 @@ public:
 	 */
 	void generatePreRanking();
 
+	/**
+	 * @brief Displays the preRanking on the console.
+	 */
+	void displayPreRanking();
+
 private:
 	std::vector<int> m_passedPlates;
 	std::vector<int> m_basePlates;
