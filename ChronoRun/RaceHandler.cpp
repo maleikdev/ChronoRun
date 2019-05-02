@@ -1,3 +1,12 @@
+/**
+ * @file RacerHandler.cpp
+ * @author Romain GOUPIL - maleikdev
+ * @brief File for the counting part.
+ *
+ * Declaration of the class for the counting table, and loading of the plates database for checking errors during the counting.
+ *
+ */
+
 #include "RaceHandler.hpp"
 
 RaceHandler::RaceHandler()
@@ -115,17 +124,17 @@ void RaceHandler::cancelPreviousPassing()
 	}
 }
 
-int RaceHandler::getRunnersNumber()
+int RaceHandler::getRunnersNumber() const
 {
 	return m_runnersNumber;
 }
 
-int RaceHandler::getCountedRunners()
+int RaceHandler::getCountedRunners() const
 {
 	return m_countedRunners;
 }
 
-int RaceHandler::getPlateInVector(const int i)
+int RaceHandler::getPlateInVector(const int i) const
 {
 	return m_passedPlates[i];
 }
@@ -145,9 +154,7 @@ bool RaceHandler::isInDatabase(const int plate)
 
 int RaceHandler::isInPreRanking(const int plate)
 {
-	int i = 0;
-
-	for (i = 0 ; i < m_preRanking.size() ; i++)
+	for (unsigned int i = 0 ; i < m_preRanking.size() ; i++)
 	{
 		if (m_preRanking[i].m_plate == plate)
 			return i;
@@ -167,7 +174,7 @@ void RaceHandler::generatePreRanking()
 		countingTableIndicator = isInPreRanking(m_passedPlates[i]);
 		if (countingTableIndicator > -1)
 		{
-			m_preRanking[i].m_passingTimes.push_back(m_passedTimes[i]);
+			m_preRanking[countingTableIndicator].m_passingTimes.push_back(m_passedTimes[i]);
 		}
 		else
 		{
@@ -181,16 +188,80 @@ void RaceHandler::generatePreRanking()
 	}
 }
 
-void RaceHandler::displayPreRanking()
+void RaceHandler::displayPreRanking() const
 {
 	int i = 0, j = 0;
 
 	for (i = 0 ; i < m_preRanking.size() ; i++)
 	{
-		std::cout << "Racer n° " << m_preRanking[i].m_plate << " Passages : ";
-		for (j = 0 ; j < m_preRanking[i].m_passingTimes.size() ; i++)
+		std::cout << "Racer no " << m_preRanking[i].m_plate << " Passages : ";
+		for (j = 0 ; j < m_preRanking[i].m_passingTimes.size() ; j++)
 		{
-			std::cout << " - " << m_preRanking[i].m_passingTimes[j];
+			std::cout << " # " << m_preRanking[i].m_passingTimes[j];
+		}
+		std::cout << std::endl;
+	}
+}
+
+void RaceHandler::generateRanking()
+{
+	Racer tempForTransfer;
+	m_Ranking.assign(m_preRanking.begin(), m_preRanking.end());
+
+
+	//Sort by the number of laps done
+	for (unsigned int i = 0 ; i < m_preRanking.size() ; i++)
+	{
+		for (unsigned int j = 0 ; j < m_preRanking.size() - 1; j++)
+		{
+			if (m_Ranking[j + 1].m_passingTimes.size() > m_Ranking[j].m_passingTimes.size())
+			{
+				tempForTransfer = m_Ranking[j];
+				m_Ranking[j] = m_Ranking[j + 1];
+				m_Ranking[j + 1] = tempForTransfer;
+			}
+		}
+	}
+
+	for (unsigned int i = 0; i < m_preRanking.size(); i++)
+	{
+		for (unsigned int j = 0; j < m_preRanking.size() - 1; j++)
+		{
+			if (m_Ranking[j + 1].m_passingTimes.size() != m_Ranking[j].m_passingTimes.size())
+				continue;;
+
+			if (m_Ranking[j + 1].m_passingTimes.back() < m_Ranking[j].m_passingTimes.back())
+			{
+				tempForTransfer = m_Ranking[j];
+				m_Ranking[j] = m_Ranking[j + 1];
+				m_Ranking[j + 1] = tempForTransfer;
+			}
+		}
+	}
+}
+
+void RaceHandler::displayRanking() const
+{
+	struct tm* clockFormatTime;
+	struct tm* clockFormatStart = localtime(&m_startTime);
+	time_t tempPassTime = 0;
+
+	///TODO: Find a safe equivalent to localtime
+
+	std::cout << "Ranking";
+	for (unsigned int i = 0; i < m_Ranking[0].m_passingTimes.size(); i++)
+		std::cout << " # LAP No " << i;
+
+	std::cout << std::endl;
+
+	for (unsigned int i = 0 ; i < m_Ranking.size() ; i++)
+	{
+		std::cout << "Racer no " << m_Ranking[i].m_plate << " Passages : ";
+		for (unsigned int j = 0; j < m_Ranking[i].m_passingTimes.size(); j++)
+		{
+			tempPassTime = m_Ranking[i].m_passingTimes[j] - m_startTime;
+			clockFormatTime = localtime(&tempPassTime);
+			std::cout << " # " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec;
 		}
 		std::cout << std::endl;
 	}

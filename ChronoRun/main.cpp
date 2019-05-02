@@ -24,6 +24,12 @@ int main(int argc, char** argv)
 	RaceHandler test;
 
 	test.startRace();
+
+	time_t t = 0;
+	
+	struct tm* cl = localtime(&t);
+
+	std::cout << "hour " << cl->tm_hour << ":" << cl->tm_min << ":" << cl->tm_sec << std::endl;
 	
 	do
 	{
@@ -39,7 +45,13 @@ int main(int argc, char** argv)
 	for (i = 0; i < test.getCountedRunners(); i++)
 		std::cout << "Passage number " << i << " : " << test.getPlateInVector(i) << std::endl;
 
-	
+	test.generatePreRanking();
+
+	test.displayPreRanking();
+
+	test.generateRanking();
+
+	test.displayRanking();
 	
 	
 	return EXIT_SUCCESS;

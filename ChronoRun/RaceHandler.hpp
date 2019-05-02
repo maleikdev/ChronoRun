@@ -1,16 +1,16 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 /**
-* @file		raceEndler.hpp
-* @author	Romain GOUPIL - maleikdev
-* @brief	File for the counting part.
-*
-* Declaration of the class for the counting table, and loading of the plates database for checking errors during the counting.
-*/
+ * @file RacerHandler.hpp
+ * @author Romain GOUPIL - maleikdev
+ * @brief File for the counting part.
+ *
+ * Declaration of the class for the counting table, and loading of the plates database for checking errors during the counting.
+ *
+ */
 
 #ifndef COUNTING_HPP
 #define COUNTING_HPP
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -89,7 +89,7 @@ public:
 	 * @return
 	 *     Number of racers in the database.
 	 */
-	int getRunnersNumber();
+	int getRunnersNumber() const;
 
 	/**
 	 * @brief Returns the number of countings.
@@ -97,7 +97,7 @@ public:
 	 * @return
 	 *     Number of counted racers.
 	 */
-	int getCountedRunners();
+	int getCountedRunners() const;
 
 	/**
 	 * @brief Return the value in the square i of m_passedPlates.
@@ -108,7 +108,7 @@ public:
 	 * @return
 	 *     Value stored in the square i of m_passedPlates.
 	 */
-	int getPlateInVector(const int i);
+	int getPlateInVector(const int i) const;
 
 	/**
 	 * @brief Says if a plate is in the database.
@@ -140,13 +140,24 @@ public:
 	/**
 	 * @brief Displays the preRanking on the console.
 	 */
-	void displayPreRanking();
+	void displayPreRanking() const;
+
+	/**
+	 * @brief Sorts the PreRanking to generate the final ranking.
+	 */
+	void generateRanking();
+
+	/**
+	 * @brief Displays the Ranking on the console.
+	 */
+	void displayRanking() const;
 
 private:
 	std::vector<int> m_passedPlates;
 	std::vector<int> m_basePlates;
 	std::vector<time_t> m_passedTimes;
 	std::vector<Racer> m_preRanking;
+	std::vector<Racer> m_Ranking;
 	int m_runnersNumber;
 	int m_countedRunners;
 	bool m_raceIsRunning;
