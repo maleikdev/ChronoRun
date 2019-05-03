@@ -1,7 +1,7 @@
 /**
  * @file RacerHandler.hpp
  * @author Romain GOUPIL - maleikdev
- * @brief File for the counting part.
+ * @brief File for the Race handling part.
  *
  * Declaration of the class for the counting table, and loading of the plates database for checking errors during the counting.
  *

@@ -38,6 +38,9 @@ Under GNU General Public License v3.0. See LICENSE file for more.
 	
 	See LICENSE file for more.
 	
+## Thanks
+I would like to thanks my friend **DorianBdev** (<https://github.com/DorianBDev>) for his help on clock.hpp/.cpp files !
+	
 ## Contact
 
 You can contact me by e-mail : rom[dot]goupil[at]orange[dot]fr
