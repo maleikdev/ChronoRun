@@ -161,7 +161,7 @@ private:
 	std::vector<int> m_basePlates;
 	std::vector<long long> m_passedTimes;
 	std::vector<Racer> m_preRanking;
-	std::vector<Racer> m_Ranking;
+	std::vector<Racer> m_ranking;
 	long long m_runnersNumber;
 	long long m_countedRunners;
 	bool m_raceIsRunning;

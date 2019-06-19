@@ -206,7 +206,7 @@ void RaceHandler::displayPreRanking() const
 void RaceHandler::generateRanking()
 {
 	Racer tempForTransfer;
-	m_Ranking.assign(m_preRanking.begin(), m_preRanking.end());
+	m_ranking.assign(m_preRanking.begin(), m_preRanking.end());
 
 
 	//Sort by the number of laps done
@@ -214,11 +214,11 @@ void RaceHandler::generateRanking()
 	{
 		for (unsigned int j = 0 ; j < m_preRanking.size() - 1; j++)
 		{
-			if (m_Ranking[j + 1].m_passingTimes.size() > m_Ranking[j].m_passingTimes.size())
+			if (m_ranking[j + 1].m_passingTimes.size() > m_ranking[j].m_passingTimes.size())
 			{
-				tempForTransfer = m_Ranking[j];
-				m_Ranking[j] = m_Ranking[j + 1];
-				m_Ranking[j + 1] = tempForTransfer;
+				tempForTransfer = m_ranking[j];
+				m_ranking[j] = m_ranking[j + 1];
+				m_ranking[j + 1] = tempForTransfer;
 			}
 		}
 	}
@@ -227,14 +227,14 @@ void RaceHandler::generateRanking()
 	{
 		for (unsigned int j = 0; j < m_preRanking.size() - 1; j++)
 		{
-			if (m_Ranking[j + 1].m_passingTimes.size() != m_Ranking[j].m_passingTimes.size())
+			if (m_ranking[j + 1].m_passingTimes.size() != m_ranking[j].m_passingTimes.size())
 				continue;;
 
-			if (m_Ranking[j + 1].m_passingTimes.back() < m_Ranking[j].m_passingTimes.back())
+			if (m_ranking[j + 1].m_passingTimes.back() < m_ranking[j].m_passingTimes.back())
 			{
-				tempForTransfer = m_Ranking[j];
-				m_Ranking[j] = m_Ranking[j + 1];
-				m_Ranking[j + 1] = tempForTransfer;
+				tempForTransfer = m_ranking[j];
+				m_ranking[j] = m_ranking[j + 1];
+				m_ranking[j + 1] = tempForTransfer;
 			}
 		}
 	}
@@ -249,21 +249,22 @@ void RaceHandler::displayRanking() const
 	///TODO: Find a safe equivalent to localtime
 
 	std::cout << "Ranking";
-	for (unsigned int i = 0; i < m_Ranking[0].m_passingTimes.size(); i++)
+	for (unsigned int i = 0; i < m_ranking[0].m_passingTimes.size(); i++)
 		std::cout << " # LAP No " << i;
 
 	std::cout << std::endl;
 
-	for (unsigned int i = 0 ; i < m_Ranking.size() ; i++)
+	for (unsigned int i = 0 ; i < m_ranking.size() ; i++)
 	{
-		std::cout << "Racer no " << m_Ranking[i].m_plate << " Passages : ";
-		for (unsigned int j = 0; j < m_Ranking[i].m_passingTimes.size(); j++)
+		std::cout << "Racer no " << m_ranking[i].m_plate << " Passages : ";
+		for (unsigned int j = 0; j < m_ranking[i].m_passingTimes.size(); j++)
 		{
-			tempPassTime = m_Ranking[i].m_passingTimes[j] - m_startTime;
+			tempPassTime = m_ranking[i].m_passingTimes[j] - m_startTime;
 
 
 			clock = convertTimeMilisecondsInUsual(tempPassTime);
 			std::cout << " # " << clock->m_hours << ":" << clock->m_minutes << ":" << clock->m_seconds << ":" << clock->m_miliseconds;
+
 
 			delete clock;
 		}
