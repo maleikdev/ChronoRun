@@ -9,7 +9,7 @@ ChronoRun is a programm that has the objective to help comissaires during the ra
 - [x] Counting programm
 - [x] Counting program with the times management
 - [ ] DNS, DNF and DSQ management (Did Not Start, Did Not Finish, Disqualified)
-- [ ] Algorithm to establish the ranking with the counting
+- [x] Algorithm to establish the ranking with the counting
 - [ ] Link the ranking with a database (names, categories, licences IDs, ...)
 - [ ] Guest User Interface
 
