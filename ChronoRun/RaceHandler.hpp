@@ -11,6 +11,9 @@
 #define COUNTING_HPP
 
 #define _CRT_SECURE_NO_WARNINGS
+
+#include "clock.hpp"
+
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -29,13 +32,14 @@
 struct Racer
 {
 	int m_plate;
-	std::vector<time_t> m_passingTimes;
+	std::vector<long long> m_passingTimes;
 };
 
+
 /**
-* @class RaceHandler
-* @brief Class for the pointing table.
-*/
+ * @class RaceHandler
+ * @brief Class for the pointing table.
+ */
 class RaceHandler
 {
 public:
@@ -155,11 +159,11 @@ public:
 private:
 	std::vector<int> m_passedPlates;
 	std::vector<int> m_basePlates;
-	std::vector<time_t> m_passedTimes;
+	std::vector<long long> m_passedTimes;
 	std::vector<Racer> m_preRanking;
 	std::vector<Racer> m_Ranking;
-	int m_runnersNumber;
-	int m_countedRunners;
+	long long m_runnersNumber;
+	long long m_countedRunners;
 	bool m_raceIsRunning;
 	time_t m_startTime;
 	time_t m_endTime;

@@ -1,0 +1,53 @@
+
+
+Histogrammes
+Fonctions qui prennent en paramètre une caractéristique d'un fichiers audio:
+
+exemple d'histogrammes :
+-histogramme montrant l'écart entre le niveau de l'échantilllon n et celui de l'échantilllon n+1
+-histogramme montrant la réparation des occurences
+
+histogramme des pixels pour une image
+
+comparer les histogramme entre chaque cover
+ce qu'il faut trouver :: comment mettre en évidence les diff entre les cover et les stego ??
+décalge de paliers, regroupent par paire de nombres : même nombre de 4 et 5, meme nombre de 6 et 7 par exemple
+
+
+attention, très peu de stéganalyse sur le son, pas évidente à traiter et à manipuler
+
+
+detection de ces paliers lors de la stéganalsyse --> attention, se fixer un seuil pour la diff stego/cover
+
+fonction qui permet de fixer ce seuil, trouver cette fonction
+différence des deux, et on divise par la somme.
+somme des différences des paires, nombre de pixels
+
+propriétés de l'échnatillon t et celui du t+1
+mesures sur les transformées de fourrier
+ecart type des différences
+
+ondelette
+etudier l'effet de la stégano sur la trans de fourrier
+
+autre mesure à réaliser, la diférence entre les "pixels"
+
+regarder le poids de l'image, faire d'autre mesure pour etre sur que ça soit stégo ou pas
+quaznd on a plusieurs valeurs, c'est un svm
+
+programme qui détecte ces paliers
+
+
+
+
+attaques sur la stégano
+détection statistique : on remmarque un écart entre une musique "normale" et la musique suspecte
+detection audio : on cherche des dégradations dans l'audio
+analyse et comparaison des histogrammes
+
+
+faire fichiers stego, regarder ce qu'il se passe au niveau des mesures
+
+faire fichiers cover
+
+trouver le seuil

@@ -74,13 +74,13 @@ void RaceHandler::startRace()
 {
 	struct tm* clockFormatTime;
 
-	m_startTime = time(NULL);
+	m_startTime = GetActualTimeMilisecond();
 	m_raceIsRunning = true;
 
 	///TODO : Find a safe equivalent for localtime().
-	clockFormatTime = localtime(&m_startTime);
+	//clockFormatTime = localtime(&m_startTime);
 
-	std::cout << "Race started at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
+	//std::cout << "Race started at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
 
 }
 
@@ -88,13 +88,13 @@ void RaceHandler::endRace()
 {
 	struct tm* clockFormatTime;
 
-	m_endTime = time(NULL);
+	m_endTime = GetActualTimeMilisecond();
 	m_raceIsRunning = false;
 
 	///TODO : Find a safe equivalent for localtime().
-	clockFormatTime = localtime(&m_startTime);
+	//clockFormatTime = localtime(&m_startTime);
 
-	std::cout << "Race ended at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
+	//std::cout << "Race ended at " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec << std::endl;
 }
 
 void RaceHandler::runnerPassing(const int plate)
@@ -106,7 +106,7 @@ void RaceHandler::runnerPassing(const int plate)
 	}
 
 	m_passedPlates.push_back(plate);
-	m_passedTimes.push_back(time(NULL));
+	m_passedTimes.push_back(GetActualTimeMilisecond());
 	m_countedRunners++;
 
 	if (!isInDatabase(plate))
@@ -242,9 +242,9 @@ void RaceHandler::generateRanking()
 
 void RaceHandler::displayRanking() const
 {
-	struct tm* clockFormatTime;
-	struct tm* clockFormatStart = localtime(&m_startTime);
-	time_t tempPassTime = 0;
+	///TODO: Convert former time format in the new time format (GetACtualTime)
+	ClockWatch* clock;
+	long long tempPassTime;
 
 	///TODO: Find a safe equivalent to localtime
 
@@ -260,8 +260,12 @@ void RaceHandler::displayRanking() const
 		for (unsigned int j = 0; j < m_Ranking[i].m_passingTimes.size(); j++)
 		{
 			tempPassTime = m_Ranking[i].m_passingTimes[j] - m_startTime;
-			clockFormatTime = localtime(&tempPassTime);
-			std::cout << " # " << clockFormatTime->tm_hour << ":" << clockFormatTime->tm_min << ":" << clockFormatTime->tm_sec;
+
+
+			clock = convertTimeMilisecondsInUsual(tempPassTime);
+			std::cout << " # " << clock->m_hours << ":" << clock->m_minutes << ":" << clock->m_seconds << ":" << clock->m_miliseconds;
+
+			delete clock;
 		}
 		std::cout << std::endl;
 	}

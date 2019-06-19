@@ -30,6 +30,8 @@ int main(int argc, char** argv)
 	struct tm* cl = localtime(&t);
 
 	std::cout << "hour " << cl->tm_hour << ":" << cl->tm_min << ":" << cl->tm_sec << std::endl;
+
+	std::cout << "actual time ms : " << GetActualTimeMilisecond() << std::endl;
 	
 	do
 	{
